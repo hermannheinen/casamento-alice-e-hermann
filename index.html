@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de presentes — Hermann &amp; Alice</title>
+<meta name="description" content="Já temos o principal: vocês comemorando com a gente! Escolha um item da nossa lista de presentes simbólica e bem-humorada.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Lista de presentes — Hermann &amp; Alice">
+<meta property="og:description" content="Uma lista simbólica e bem-humorada. Escolha o item que mais combina com você e pague por Pix.">
+<meta name="theme-color" content="#f8f1e7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f8f1e7;
+    --card: #fffdf9;
+    --ink: #2e2a27;
+    --muted: #6b625a;
+    --accent: #7a3b2e;       /* terracota escuro */
+    --accent-ink: #ffffff;
+    --sage: #4f6b57;
+    --line: #e4d8c6;
+    --focus: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; line-height: 1.2; }
+  header { text-align: center; padding: 24px 0 8px; }
+  header .ring { font-size: 40px; }
+  h1 { font-size: 2rem; margin: 8px 0 12px; color: var(--accent); }
+  .intro { color: var(--muted); margin: 0 auto; max-width: 34em; }
+  .how { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin: 24px 0; }
+  .how h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--sage); }
+  .how ol { margin: 0; padding-left: 1.3em; }
+  .how p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
+  .group h2 { font-size: 1.4rem; margin: 36px 0 2px; color: var(--sage); border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  .group .sub { margin: 6px 0 14px; color: var(--muted); font-size: .95rem; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .card h3 { margin: 0 0 4px; font-size: 1.1rem; }
+  .card p { margin: 0 0 10px; color: var(--muted); font-size: .97rem; }
+  .price { font-weight: 700; font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  button, input { font: inherit; }
+  button {
+    min-height: 48px; padding: 10px 18px; border-radius: 10px; cursor: pointer;
+    border: 2px solid var(--accent); flex: 1 1 140px;
+  }
+  .btn-copy { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .btn-qr { background: transparent; color: var(--accent); font-weight: 600; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .qr { margin-top: 14px; text-align: center; }
+  .qr[hidden] { display: none; }
+  .qr svg { width: 220px; height: 220px; max-width: 100%; background: #fff; padding: 8px; border-radius: 8px; border: 1px solid var(--line); }
+  .qr small { display: block; color: var(--muted); margin-top: 6px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .field { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .field span { font-weight: 700; }
+  input[type=text] { flex: 1; min-height: 48px; padding: 8px 12px; border: 2px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+  .error { color: #b00020; min-height: 1.4em; margin: 0 0 8px; font-size: .95rem; }
+  #toast {
+    position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 20px); opacity: 0;
+    background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 10px; max-width: calc(100% - 32px);
+    text-align: center; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 10;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+  footer { text-align: center; color: var(--muted); margin-top: 40px; font-size: .95rem; }
+  @media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="ring" aria-hidden="true">💍</div>
+    <h1>Lista de presentes — Hermann &amp; Alice</h1>
+    <p class="intro">Já temos o principal: vocês comemorando com a gente! Depois de uma grande reforma no nosso apartamento (e já planejando a nossa viagem do ano que vem), criamos uma lista simbólica e bem-humorada. Escolha o item que mais combina com você — o valor vai direto para o fundo dos últimos retoques da casa e para as nossas férias!</p>
+  </header>
+
+  <section class="how" aria-labelledby="como-pagar">
+    <h2 id="como-pagar">Como pagar</h2>
+    <ol>
+      <li>Toque em <strong>Copiar Pix</strong>.</li>
+      <li>Abra o app do seu banco.</li>
+      <li>Escolha <strong>Pix → Pix copia e cola</strong>.</li>
+      <li>Cole, confira o valor e o nome do recebedor, e confirme.</li>
+    </ol>
+    <p>Está no computador? Toque em <strong>Ver QR code</strong> e escaneie com o celular.</p>
+  </section>
+
+  <main id="lista"></main>
+
+  <footer>Obrigado pelo carinho! 💛</footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="qrcode.js"></script>
+<script>
+/* ============ CONFIG — edite aqui ============ */
+const CONFIG = {
+  chavePix: "becb4f6d-b217-46e2-9f7b-4509b4ecc9cb",
+  nome: "Alice Teixeira da Rosa",   // máx. 25 caracteres (vira MAIÚSCULAS, sem acentos)
+  cidade: "Porto Alegre"            // máx. 15 caracteres
+};
+
+/* ============ ITENS — edite textos e valores aqui ============ */
+const GRUPOS = [
+  {
+    titulo: "Entrada / Sem constrangimento",
+    itens: [
+      { titulo: "Cota “Cerveja trincando para a galera”", descricao: "Para garantir que o brinde no salão não pare nem por um minuto", valor: 80 },
+      { titulo: "Fundo de emergência para o carvão, gelo e sal grosso", descricao: "Seguro contra cerveja quente e churrasco sem fogo", valor: 100 },
+      { titulo: "Leiteira para a Alice cozinhar o ovo cozido", descricao: "Agora que o fogão virou de indução, falta a panelinha certa para o ovo ficar no ponto", valor: 120 },
+      { titulo: "Filamento para a impressora 3D do Hermann", descricao: "Combustível para ele imprimir tudo o que a casa ainda não sabia que precisava", valor: 150 }
+    ]
+  },
+  {
+    titulo: "Faixa principal — Individual e Casais",
+    itens: [
+      { titulo: "Tampão de ouvido anti-ronco para a Alice", descricao: "Investimento direto na paz e na qualidade do sono dela", valor: 150 },
+      { titulo: "Mensalidade de volta ao treino funcional para o Hermann", descricao: "Para tirar a ferrugem de quem está parado e devolver ele para a ativa", valor: 180 },
+      { titulo: "Massagem de liberação facial para a Alice", descricao: "Porque depois de sobreviver a uma reforma inteira, ela merece aliviar toda a tensão", valor: 200 },
+      { titulo: "Alvará para o Hermann jogar no PC sem ser interrompido", descricao: "Válido por uma partida inteira (ou um fim de semana de jogatina)", valor: 220 },
+      { titulo: "Diária de “Marido de Aluguel” para os últimos retoques do apê", descricao: "Para o Hermann não ter que resolver sozinho os pequenos detalhes que ficaram malfeitos na obra", valor: 250 },
+      { titulo: "Fundo “Upgrade do Mestre-Cuca”", descricao: "Novos utensílios de cozinha para o Hermann continuar evoluindo nas receitas em casa", valor: 280 },
+      { titulo: "Vale-compras / mimo livre para a Alice", descricao: "Sem perguntas, sem prestação de contas — só porque ela merece", valor: 300 },
+      { titulo: "Primeiro jantar romântico de casados (sem precisar lavar louça)", descricao: "Para inaugurar a nova fase com dignidade", valor: 320 },
+      { titulo: "Cota “Espaço extra para as pernas” no voo", descricao: "Para a viagem do ano que vem já começar sem aperto", valor: 350 }
+    ]
+  },
+  {
+    titulo: "Teto — Família próxima ou vaquinha",
+    itens: [
+      { titulo: "Jantar VIP na viagem (com direito a foto de agradecimento)", descricao: "Vocês patrocinam a noite, a gente manda selfie brindando", valor: 450 },
+      { titulo: "Fundo de retoques finais da casa", descricao: "Para fechar com chave de ouro os últimos detalhes do nosso cantinho", valor: 500 },
+      { titulo: "Patrocínio Oficial da Viagem dos Sonhos (Cota Master)", descricao: "Para quem quer garantir lugar cativo na primeira fila das histórias (e das fotos) das nossas férias", valor: 1000 }
+    ]
+  }
+];
+
+/* ============ PIX (BR Code estático, EMV) ============ */
+function crc16(str) {
+  let crc = 0xFFFF;
+  for (let i = 0; i < str.length; i++) {
+    crc ^= (str.charCodeAt(i) & 0xFF) << 8;
+    for (let b = 0; b < 8; b++) {
+      crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, "0");
+}
+
+function tlv(id, value) {
+  return id + String(value.length).padStart(2, "0") + value;
+}
+
+function limpar(texto, max) {
+  return texto.normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .toUpperCase().replace(/[^A-Z0-9 ]/g, "").trim().slice(0, max).trim();
+}
+
+function gerarPix(valor, cfg) {
+  cfg = cfg || CONFIG;
+  const conta = tlv("00", "br.gov.bcb.pix") + tlv("01", cfg.chavePix);
+  const corpo =
+    tlv("00", "01") +
+    tlv("01", "11") +
+    tlv("26", conta) +
+    tlv("52", "0000") +
+    tlv("53", "986") +
+    tlv("54", Number(valor).toFixed(2)) +
+    tlv("58", "BR") +
+    tlv("59", limpar(cfg.nome, 25)) +
+    tlv("60", limpar(cfg.cidade, 15)) +
+    tlv("62", tlv("05", "***")) +
+    "6304";
+  return corpo + crc16(corpo);
+}
+
+function formatarReal(v) {
+  return "R$ " + Number(v).toLocaleString("pt-BR", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+}
+
+/* ============ INTERFACE ============ */
+if (typeof document !== "undefined") {
+  const toastEl = document.getElementById("toast");
+  let toastTimer;
+  function aviso(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove("show"), 3500);
+  }
+
+  function copiar(texto) {
+    const ok = () => aviso("Pix copiado! Cole em Pix copia e cola no app do banco");
+    const fallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = texto; ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0, texto.length);
+      let sucesso = false;
+      try { sucesso = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      sucesso ? ok() : aviso("Não consegui copiar. Use o QR code ou selecione o código manualmente.");
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texto).then(ok, fallback);
+    } else fallback();
+  }
+
+  function el(tag, attrs, children) {
+    const e = document.createElement(tag);
+    Object.entries(attrs || {}).forEach(([k, v]) => k === "text" ? e.textContent = v : e.setAttribute(k, v));
+    (children || []).forEach(c => e.appendChild(c));
+    return e;
+  }
+
+  // Cria os botões Copiar/QR para uma função que devolve o payload atual.
+  function acoes(idBase, obterPayload) {
+    const qr = el("div", { class: "qr", id: idBase + "-qr", hidden: "" });
+    const btnCopy = el("button", { type: "button", class: "btn-copy", text: "Copiar Pix" });
+    const btnQr = el("button", { type: "button", class: "btn-qr", "aria-expanded": "false", "aria-controls": idBase + "-qr", text: "Ver QR code" });
+    btnCopy.addEventListener("click", () => { const p = obterPayload(); if (p) copiar(p); });
+    btnQr.addEventListener("click", () => {
+      const abrir = qr.hidden;
+      if (abrir) {
+        const p = obterPayload();
+        if (!p) return;
+        desenharQr(qr, p);
+      }
+      qr.hidden = !abrir;
+      btnQr.setAttribute("aria-expanded", String(abrir));
+      btnQr.textContent = abrir ? "Ocultar QR code" : "Ver QR code";
+    });
+    return { botoes: el("div", { class: "actions" }, [btnCopy, btnQr]), qr, btnQr };
+  }
+
+  function desenharQr(container, payload) {
+    const q = qrcode(0, "M");
+    q.addData(payload);
+    q.make();
+    container.innerHTML = q.createSvgTag({ scalable: true, margin: 0 });
+    const svg = container.querySelector("svg");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "QR code do Pix");
+    const nota = el("small", { text: "Escaneie com o app do banco (Pix → Ler QR code)" });
+    container.appendChild(nota);
+  }
+
+  const raiz = document.getElementById("lista");
+  let n = 0;
+  GRUPOS.forEach(g => {
+    const sec = el("section", { class: "group" });
+    sec.appendChild(el("h2", { text: g.titulo }));
+    g.itens.forEach(it => {
+      const id = "item" + (++n);
+      const a = acoes(id, () => gerarPix(it.valor));
+      sec.appendChild(el("article", { class: "card" }, [
+        el("h3", { text: it.titulo }),
+        el("p", { text: it.descricao }),
+        el("div", { class: "price", text: formatarReal(it.valor) }),
+        a.botoes, a.qr
+      ]));
+    });
+    raiz.appendChild(sec);
+  });
+
+  // Cartão "Outro valor"
+  (function () {
+    const input = el("input", { type: "text", id: "outro-valor", inputmode: "decimal", autocomplete: "off", placeholder: "0,00", "aria-describedby": "outro-erro" });
+    const erro = el("p", { class: "error", id: "outro-erro", role: "alert" });
+    let a;
+    function valorValido() {
+      const bruto = input.value.trim().replace(/\./g, "").replace(",", ".");
+      const v = Number(bruto);
+      if (!bruto || !isFinite(v) || v < 1 || v > 9999999.99) {
+        erro.textContent = "Digite um valor de pelo menos R$ 1,00 (ex.: 75,50).";
+        return null;
+      }
+      erro.textContent = "";
+      return Math.round(v * 100) / 100;
+    }
+    a = acoes("outro", () => { const v = valorValido(); return v === null ? null : gerarPix(v); });
+    // Se o valor mudar com o QR aberto, atualiza.
+    input.addEventListener("input", () => {
+      if (!a.qr.hidden) { const v = valorValido(); v === null ? (a.qr.hidden = true, a.btnQr.setAttribute("aria-expanded", "false"), a.btnQr.textContent = "Ver QR code") : desenharQr(a.qr, gerarPix(v)); }
+    });
+    const sec = el("section", { class: "group" }, [
+      el("h2", { text: "Outro valor" }),
+      el("article", { class: "card" }, [
+        el("h3", { text: "Prefere escolher quanto dar?" }),
+        el("p", { text: "Digite o valor e gere o Pix na hora. Mínimo de R$ 1,00." }),
+        el("label", { for: "outro-valor", text: "Valor em R$" }),
+        el("div", { class: "field" }, [el("span", { "aria-hidden": "true", text: "R$" }), input]),
+        erro, a.botoes, a.qr
+      ])
+    ]);
+    raiz.appendChild(sec);
+  })();
+}
+</script>
+</body>
+</html>
