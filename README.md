@@ -1,6 +1,6 @@
 # wedding-gifts
 
-Lista de presentes de casamento de Hermann & Alice: uma página estática (um único `index.html`, sem build, sem framework, sem backend). Cada item gera um Pix "copia e cola" (BR Code estático) com o valor já preenchido, mais o QR code correspondente. Tudo é gerado no navegador; nada é enviado a servidor algum, e não há analytics nem cookies.
+Lista de presentes de casamento de Alice & Hermann: uma página estática (um único `index.html`, sem build, sem framework, sem backend). Cada item gera um Pix "copia e cola" (BR Code estático) com o valor já preenchido, mais o QR code correspondente. Tudo é gerado no navegador; nada é enviado a servidor algum, e não há analytics nem cookies.
 
 ## Estrutura
 

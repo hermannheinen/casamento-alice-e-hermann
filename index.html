@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lista de presentes — Hermann &amp; Alice</title>
+<title>Lista de presentes — Alice &amp; Hermann</title>
 <meta name="description" content="Já temos o principal: vocês comemorando com a gente! Escolha um item da nossa lista de presentes simbólica e bem-humorada.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Lista de presentes — Hermann &amp; Alice">
+<meta property="og:title" content="Lista de presentes — Alice &amp; Hermann">
 <meta property="og:description" content="Uma lista simbólica e bem-humorada. Escolha o item que mais combina com você e pague por Pix.">
 <meta name="theme-color" content="#fff7ed">
 <meta property="og:image" content="logo.jpg">
@@ -48,10 +48,6 @@
   .logo { display: block; width: 260px; height: 260px; max-width: 80%; height: auto; margin: -50px auto -40px; }
   header::after { content: ""; display: block; width: 60px; border-top: 2px solid var(--leaf); margin: 20px auto 0; }
   .intro { font-weight: 400; color: var(--muted); margin: 0 auto; max-width: 34em; }
-  .how { background: var(--band); border: 0; border-radius: 14px; padding: 16px 20px; margin: 24px 0; }
-  .how h2 { font-family: inherit; margin: 0 0 8px; font-size: 1rem; text-transform: uppercase; letter-spacing: .15em; color: var(--sage); }
-  .how ol { margin: 0; padding-left: 1.3em; }
-  .how p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
   .list { margin-top: 24px; }
   .list h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .15em; color: var(--sage); margin: 32px 0 12px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px; margin-bottom: 14px; }
@@ -67,6 +63,13 @@
   .btn-copy { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
   .btn-qr { background: transparent; color: var(--accent); font-weight: 600; }
   button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .painel { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .painel[hidden] { display: none; }
+  .status { margin: 0 0 12px; font-weight: 500; color: var(--accent); }
+  .ajuda { margin-top: 14px; background: var(--band); border-radius: 4px; padding: 12px 16px; }
+  .ajuda h4 { margin: 0 0 6px; font-size: .85rem; text-transform: uppercase; letter-spacing: .15em; color: var(--sage); font-weight: 500; }
+  .ajuda ol { margin: 0; padding-left: 1.3em; font-size: .95rem; }
+  .ajuda p { margin: 8px 0 0; font-size: .9rem; color: var(--muted); }
   .qr { margin-top: 14px; text-align: center; }
   .qr[hidden] { display: none; }
   .qr svg { width: 220px; height: 220px; max-width: 100%; background: #fff; padding: 8px; border-radius: 8px; border: 1px solid var(--line); }
@@ -90,20 +93,9 @@
 <div class="wrap">
   <header>
     <img class="logo" src="logo.jpg" width="260" height="260" alt="Monograma A e H, Alice e Hermann">
-    <h1>Lista de presentes — Hermann &amp; Alice</h1>
+    <h1>Lista de presentes — Alice &amp; Hermann</h1>
     <p class="intro">Já temos o principal: vocês comemorando com a gente! Depois de uma grande reforma no nosso apartamento (e já planejando a nossa viagem do ano que vem), criamos uma lista simbólica e bem-humorada. Escolha o item que mais combina com você — o valor vai direto para o fundo dos últimos retoques da casa e para as nossas férias!</p>
   </header>
-
-  <section class="how" aria-labelledby="como-pagar">
-    <h2 id="como-pagar">Como pagar</h2>
-    <ol>
-      <li>Toque em <strong>Copiar Pix</strong>.</li>
-      <li>Abra o app do seu banco.</li>
-      <li>Escolha <strong>Pix → Pix copia e cola</strong>.</li>
-      <li>Cole, confira o valor e o nome do recebedor, e confirme.</li>
-    </ol>
-    <p>Está no computador? Toque em <strong>Ver QR code</strong> e escaneie com o celular.</p>
-  </section>
 
   <main id="lista"></main>
 
@@ -219,24 +211,60 @@ if (typeof document !== "undefined") {
     return e;
   }
 
-  // Cria os botões Copiar/QR para uma função que devolve o payload atual.
+  const celular = !!(window.matchMedia && matchMedia("(pointer: coarse)").matches);
+
+  // Um único botão "Quero esse". Ao clicar, abre o painel com Copiar Pix, QR code e a ajuda.
+  // No celular copia o Pix na hora; no computador já mostra o QR code.
+  // obterPayload() devolve o código Pix atual (ou null se o valor for inválido).
   function acoes(idBase, obterPayload) {
-    const qr = el("div", { class: "qr", id: idBase + "-qr", hidden: "" });
+    const btnQuero = el("button", { type: "button", class: "btn-copy btn-quero", "aria-expanded": "false", "aria-controls": idBase + "-painel", text: "Quero esse" });
+    const status = el("p", { class: "status", role: "status" });
+    const qr = el("div", { class: "qr", hidden: "" });
     const btnCopy = el("button", { type: "button", class: "btn-copy", text: "Copiar Pix" });
-    const btnQr = el("button", { type: "button", class: "btn-qr", "aria-expanded": "false", "aria-controls": idBase + "-qr", text: "Ver QR code" });
-    btnCopy.addEventListener("click", () => { const p = obterPayload(); if (p) copiar(p); });
-    btnQr.addEventListener("click", () => {
-      const abrir = qr.hidden;
-      if (abrir) {
-        const p = obterPayload();
-        if (!p) return;
-        desenharQr(qr, p);
+    const btnQr = el("button", { type: "button", class: "btn-qr", "aria-expanded": "false", text: "Ver QR code" });
+    const ajuda = el("div", { class: "ajuda" }, [
+      el("h4", { text: "Como pagar" }),
+      el("ol", {}, [
+        el("li", { text: "Toque em Copiar Pix." }),
+        el("li", { text: "Abra o app do seu banco." }),
+        el("li", { text: "Escolha Pix → Pix copia e cola." }),
+        el("li", { text: "Cole, confira o valor e o nome do recebedor (" + limpar(CONFIG.nome, 25) + ") e confirme." })
+      ]),
+      el("p", { text: "Está no computador? Escaneie o QR code com a câmera do celular ou pelo app do banco (Pix → Ler QR code)." })
+    ]);
+    const painel = el("div", { class: "painel", id: idBase + "-painel", hidden: "" }, [
+      status, el("div", { class: "actions" }, [btnCopy, btnQr]), qr, ajuda
+    ]);
+
+    function mostrarQr(mostrar) {
+      if (mostrar) { const p = obterPayload(); if (!p) return; desenharQr(qr, p); }
+      qr.hidden = !mostrar;
+      btnQr.setAttribute("aria-expanded", String(mostrar));
+      btnQr.textContent = mostrar ? "Ocultar QR code" : "Ver QR code";
+    }
+    function fechar() {
+      painel.hidden = true; mostrarQr(false); status.textContent = "";
+      btnQuero.setAttribute("aria-expanded", "false"); btnQuero.textContent = "Quero esse";
+    }
+    btnQuero.addEventListener("click", () => {
+      if (!painel.hidden) { fechar(); return; }
+      const p = obterPayload();
+      if (!p) return;
+      painel.hidden = false;
+      btnQuero.setAttribute("aria-expanded", "true");
+      btnQuero.textContent = "Fechar";
+      if (celular) {
+        copiar(p);
+        status.textContent = "Pix copiado! Agora abra o app do seu banco e use Pix → Pix copia e cola.";
+      } else {
+        mostrarQr(true);
+        status.textContent = "Escaneie o QR code com o celular ou copie o código Pix.";
       }
-      qr.hidden = !abrir;
-      btnQr.setAttribute("aria-expanded", String(abrir));
-      btnQr.textContent = abrir ? "Ocultar QR code" : "Ver QR code";
+      painel.scrollIntoView({ block: "nearest", behavior: "smooth" });
     });
-    return { botoes: el("div", { class: "actions" }, [btnCopy, btnQr]), qr, btnQr };
+    btnCopy.addEventListener("click", () => { const p = obterPayload(); if (p) copiar(p); });
+    btnQr.addEventListener("click", () => mostrarQr(qr.hidden));
+    return { botoes: btnQuero, painel, fechar };
   }
 
   function desenharQr(container, payload) {
@@ -259,7 +287,7 @@ if (typeof document !== "undefined") {
       el("h3", { text: it.titulo }),
       el("p", { text: it.descricao }),
       el("div", { class: "price", text: formatarReal(it.valor) }),
-      a.botoes, a.qr
+      el("div", { class: "actions" }, [a.botoes]), a.painel
     ]));
   });
   raiz.appendChild(lista);
@@ -280,10 +308,8 @@ if (typeof document !== "undefined") {
       return Math.round(v * 100) / 100;
     }
     a = acoes("outro", () => { const v = valorValido(); return v === null ? null : gerarPix(v); });
-    // Se o valor mudar com o QR aberto, atualiza.
-    input.addEventListener("input", () => {
-      if (!a.qr.hidden) { const v = valorValido(); v === null ? (a.qr.hidden = true, a.btnQr.setAttribute("aria-expanded", "false"), a.btnQr.textContent = "Ver QR code") : desenharQr(a.qr, gerarPix(v)); }
-    });
+    // Se o valor mudar com o painel aberto, fecha (o código antigo não vale mais).
+    input.addEventListener("input", () => a.fechar());
     const sec = el("section", { class: "list" }, [
       el("h2", { text: "Outro valor" }),
       el("article", { class: "card" }, [
@@ -291,7 +317,7 @@ if (typeof document !== "undefined") {
         el("p", { text: "Digite o valor e gere o Pix na hora. Mínimo de R$ 1,00." }),
         el("label", { for: "outro-valor", text: "Valor em R$" }),
         el("div", { class: "field" }, [el("span", { "aria-hidden": "true", text: "R$" }), input]),
-        erro, a.botoes, a.qr
+        erro, el("div", { class: "actions" }, [a.botoes]), a.painel
       ])
     ]);
     raiz.appendChild(sec);
