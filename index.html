@@ -23,6 +23,7 @@
       <h1 id="titulo">Vamos nos casar e queremos comemorar com você!</h1>
       <p class="data-destaque" data-ev="dataExtenso"></p>
       <p class="intro">Depois de uma reforma inteira, chegou a melhor parte: oficializar tudo e brindar com quem a gente mais gosta. Primeiro vem a assinatura do casamento e, depois, churrasco e cerveja, num clima leve e descontraído. Só falta você!</p>
+      <p class="aviso-caixa rsvp">Confirme sua presença com a gente até <strong data-ev="confirmarAte"></strong>.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#local">Ver local e horários</a>
         <a class="btn btn-secondary" href="#presentes">Ver lista de presentes</a>
@@ -95,7 +96,9 @@
   // Preenche os textos a partir do objeto EVENT (event.js).
   const dataLonga = new Date(EVENT.data + "T12:00:00Z").toLocaleDateString("pt-BR",
     { weekday: "long", day: "2-digit", month: "long", year: "numeric", timeZone: "UTC" });
-  const valores = { noivos: EVENT.noivos, dataExtenso: dataLonga, assinatura: EVENT.assinatura, recepcao: EVENT.recepcao };
+  const confirmarAte = new Date(EVENT.confirmarAte + "T12:00:00Z").toLocaleDateString("pt-BR",
+    { weekday: "long", day: "2-digit", month: "2-digit", timeZone: "UTC" });
+  const valores = { confirmarAte, noivos: EVENT.noivos, dataExtenso: dataLonga, assinatura: EVENT.assinatura, recepcao: EVENT.recepcao };
   document.querySelectorAll("[data-ev]").forEach(e => { e.textContent = valores[e.dataset.ev]; });
 
   const enderecoCompleto = EVENT.endereco + ", " + EVENT.cidade;

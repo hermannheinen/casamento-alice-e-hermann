@@ -94,7 +94,7 @@ section[id] { scroll-margin-top: 80px; }
 
 /* ---------- Seções do site ---------- */
 .hero { text-align: center; padding: 8px 0 8px; }
-.hero .chamada { font-size: 1.15rem; font-weight: 400; color: var(--muted); margin: 0 auto 12px; max-width: 28em; }
+.rsvp { max-width: 30em; margin: 16px auto; text-align: center; }
 .data-destaque { display: inline-block; margin: 8px 0 18px; padding: 10px 20px; background: var(--band); border-radius: 4px; font-weight: 600; color: var(--accent); }
 .hero .actions { justify-content: center; margin-top: 8px; }
 .hero .actions .btn { max-width: 280px; }
