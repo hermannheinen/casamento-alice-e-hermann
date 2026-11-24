@@ -12,43 +12,50 @@
 <meta name="theme-color" content="#f8f1e7">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E">
 <style>
+  @font-face {
+    font-family: "Montserrat"; font-style: normal; font-weight: 300 600; font-display: swap;
+    src: url(fonts/montserrat-latin.woff2) format("woff2");
+  }
   :root {
-    --bg: #f8f1e7;
-    --card: #fffdf9;
-    --ink: #2e2a27;
-    --muted: #6b625a;
-    --accent: #7a3b2e;       /* terracota escuro */
+    --bg: #ffffff;
+    --card: #ffffff;
+    --ink: #222222;
+    --muted: #595959;
+    --accent: #3f6b57;       /* verde folhagem */
     --accent-ink: #ffffff;
-    --sage: #4f6b57;
-    --line: #e4d8c6;
+    --sage: #3f6b57;
+    --leaf: #a9c99a;
+    --band: #f2f2f2;
+    --line: #dcdcdc;
     --focus: #1d4ed8;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 300 17px/1.6 "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
-  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; line-height: 1.2; }
-  header { text-align: center; padding: 24px 0 8px; }
+  h1, h2, h3 { font-weight: 400; line-height: 1.25; }
+  header { text-align: center; padding: 24px 0 8px; border-top: 6px solid var(--leaf); }
   header .ring { font-size: 40px; }
-  h1 { font-size: 2rem; margin: 8px 0 12px; color: var(--accent); }
-  .intro { color: var(--muted); margin: 0 auto; max-width: 34em; }
-  .how { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin: 24px 0; }
-  .how h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--sage); }
+  h1 { font-size: 1.9rem; font-weight: 300; text-transform: uppercase; letter-spacing: .08em; margin: 8px 0 16px; color: var(--ink); }
+  header::after { content: ""; display: block; width: 60px; border-top: 2px solid var(--ink); margin: 20px auto 0; }
+  .intro { font-weight: 400; color: var(--muted); margin: 0 auto; max-width: 34em; }
+  .how { background: var(--band); border: 0; border-radius: 14px; padding: 16px 20px; margin: 24px 0; }
+  .how h2 { margin: 0 0 8px; font-size: 1rem; text-transform: uppercase; letter-spacing: .15em; color: var(--sage); }
   .how ol { margin: 0; padding-left: 1.3em; }
   .how p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
-  .group h2 { font-size: 1.4rem; margin: 36px 0 2px; color: var(--sage); border-bottom: 2px solid var(--line); padding-bottom: 6px; }
-  .group .sub { margin: 6px 0 14px; color: var(--muted); font-size: .95rem; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
-  .card h3 { margin: 0 0 4px; font-size: 1.1rem; }
-  .card p { margin: 0 0 10px; color: var(--muted); font-size: .97rem; }
-  .price { font-weight: 700; font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; }
+  .list { margin-top: 24px; }
+  .list h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .15em; color: var(--sage); margin: 32px 0 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px; margin-bottom: 14px; }
+  .card h3 { margin: 0 0 4px; font-size: 1.05rem; font-weight: 500; }
+  .card p { font-weight: 400; margin: 0 0 10px; color: var(--muted); font-size: .97rem; }
+  .price { font-weight: 600; font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; }
   .actions { display: flex; gap: 10px; flex-wrap: wrap; }
   button, input { font: inherit; }
   button {
-    min-height: 48px; padding: 10px 18px; border-radius: 10px; cursor: pointer;
+    min-height: 48px; padding: 10px 18px; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem;
     border: 2px solid var(--accent); flex: 1 1 140px;
   }
   .btn-copy { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
@@ -69,14 +76,13 @@
     text-align: center; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 10;
   }
   #toast.show { opacity: 1; transform: translate(-50%, 0); }
-  footer { text-align: center; color: var(--muted); margin-top: 40px; font-size: .95rem; }
+  footer { border-bottom: 6px solid var(--leaf); padding-bottom: 20px; text-align: center; color: var(--muted); margin-top: 40px; font-size: .95rem; }
   @media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="ring" aria-hidden="true">💍</div>
     <h1>Lista de presentes — Hermann &amp; Alice</h1>
     <p class="intro">Já temos o principal: vocês comemorando com a gente! Depois de uma grande reforma no nosso apartamento (e já planejando a nossa viagem do ano que vem), criamos uma lista simbólica e bem-humorada. Escolha o item que mais combina com você — o valor vai direto para o fundo dos últimos retoques da casa e para as nossas férias!</p>
   </header>
@@ -108,38 +114,23 @@ const CONFIG = {
 };
 
 /* ============ ITENS — edite textos e valores aqui ============ */
-const GRUPOS = [
-  {
-    titulo: "Entrada / Sem constrangimento",
-    itens: [
-      { titulo: "Cota “Cerveja trincando para a galera”", descricao: "Para garantir que o brinde no salão não pare nem por um minuto", valor: 80 },
-      { titulo: "Fundo de emergência para o carvão, gelo e sal grosso", descricao: "Seguro contra cerveja quente e churrasco sem fogo", valor: 100 },
-      { titulo: "Leiteira para a Alice cozinhar o ovo cozido", descricao: "Agora que o fogão virou de indução, falta a panelinha certa para o ovo ficar no ponto", valor: 120 },
-      { titulo: "Filamento para a impressora 3D do Hermann", descricao: "Combustível para ele imprimir tudo o que a casa ainda não sabia que precisava", valor: 150 }
-    ]
-  },
-  {
-    titulo: "Faixa principal — Individual e Casais",
-    itens: [
-      { titulo: "Tampão de ouvido anti-ronco para a Alice", descricao: "Investimento direto na paz e na qualidade do sono dela", valor: 150 },
-      { titulo: "Mensalidade de volta ao treino funcional para o Hermann", descricao: "Para tirar a ferrugem de quem está parado e devolver ele para a ativa", valor: 180 },
-      { titulo: "Massagem de liberação facial para a Alice", descricao: "Porque depois de sobreviver a uma reforma inteira, ela merece aliviar toda a tensão", valor: 200 },
-      { titulo: "Alvará para o Hermann jogar no PC sem ser interrompido", descricao: "Válido por uma partida inteira (ou um fim de semana de jogatina)", valor: 220 },
-      { titulo: "Diária de “Marido de Aluguel” para os últimos retoques do apê", descricao: "Para o Hermann não ter que resolver sozinho os pequenos detalhes que ficaram malfeitos na obra", valor: 250 },
-      { titulo: "Fundo “Upgrade do Mestre-Cuca”", descricao: "Novos utensílios de cozinha para o Hermann continuar evoluindo nas receitas em casa", valor: 280 },
-      { titulo: "Vale-compras / mimo livre para a Alice", descricao: "Sem perguntas, sem prestação de contas — só porque ela merece", valor: 300 },
-      { titulo: "Primeiro jantar romântico de casados (sem precisar lavar louça)", descricao: "Para inaugurar a nova fase com dignidade", valor: 320 },
-      { titulo: "Cota “Espaço extra para as pernas” no voo", descricao: "Para a viagem do ano que vem já começar sem aperto", valor: 350 }
-    ]
-  },
-  {
-    titulo: "Teto — Família próxima ou vaquinha",
-    itens: [
-      { titulo: "Jantar VIP na viagem (com direito a foto de agradecimento)", descricao: "Vocês patrocinam a noite, a gente manda selfie brindando", valor: 450 },
-      { titulo: "Fundo de retoques finais da casa", descricao: "Para fechar com chave de ouro os últimos detalhes do nosso cantinho", valor: 500 },
-      { titulo: "Patrocínio Oficial da Viagem dos Sonhos (Cota Master)", descricao: "Para quem quer garantir lugar cativo na primeira fila das histórias (e das fotos) das nossas férias", valor: 1000 }
-    ]
-  }
+const ITENS = [
+  { titulo: "Cota “Cerveja trincando para a galera”", descricao: "Para garantir que o brinde no salão não pare nem por um minuto", valor: 80 },
+  { titulo: "Fundo de emergência para o carvão, gelo e sal grosso", descricao: "Seguro contra cerveja quente e churrasco sem fogo", valor: 100 },
+  { titulo: "Leiteira para a Alice cozinhar o ovo cozido", descricao: "Agora que o fogão virou de indução, falta a panelinha certa para o ovo ficar no ponto", valor: 120 },
+  { titulo: "Filamento para a impressora 3D do Hermann", descricao: "Combustível para ele imprimir tudo o que a casa ainda não sabia que precisava", valor: 150 },
+  { titulo: "Tampão de ouvido anti-ronco para a Alice", descricao: "Investimento direto na paz e na qualidade do sono dela", valor: 150 },
+  { titulo: "Mensalidade de volta ao treino funcional para o Hermann", descricao: "Para tirar a ferrugem de quem está parado e devolver ele para a ativa", valor: 180 },
+  { titulo: "Massagem de liberação facial para a Alice", descricao: "Porque depois de sobreviver a uma reforma inteira, ela merece aliviar toda a tensão", valor: 200 },
+  { titulo: "Alvará para o Hermann jogar no PC sem ser interrompido", descricao: "Válido por uma partida inteira (ou um fim de semana de jogatina)", valor: 220 },
+  { titulo: "Diária de “Marido de Aluguel” para os últimos retoques do apê", descricao: "Para o Hermann não ter que resolver sozinho os pequenos detalhes que ficaram malfeitos na obra", valor: 250 },
+  { titulo: "Fundo “Upgrade do Mestre-Cuca”", descricao: "Novos utensílios de cozinha para o Hermann continuar evoluindo nas receitas em casa", valor: 280 },
+  { titulo: "Vale-compras / mimo livre para a Alice", descricao: "Sem perguntas, sem prestação de contas — só porque ela merece", valor: 300 },
+  { titulo: "Primeiro jantar romântico de casados (sem precisar lavar louça)", descricao: "Para inaugurar a nova fase com dignidade", valor: 320 },
+  { titulo: "Cota “Espaço extra para as pernas” no voo", descricao: "Para a viagem do ano que vem já começar sem aperto", valor: 350 },
+  { titulo: "Jantar VIP na viagem (com direito a foto de agradecimento)", descricao: "Vocês patrocinam a noite, a gente manda selfie brindando", valor: 450 },
+  { titulo: "Fundo de retoques finais da casa", descricao: "Para fechar com chave de ouro os últimos detalhes do nosso cantinho", valor: 500 },
+  { titulo: "Patrocínio Oficial da Viagem dos Sonhos (Cota Master)", descricao: "Para quem quer garantir lugar cativo na primeira fila das histórias (e das fotos) das nossas férias", valor: 1000 }
 ];
 
 /* ============ PIX (BR Code estático, EMV) ============ */
@@ -254,22 +245,17 @@ if (typeof document !== "undefined") {
   }
 
   const raiz = document.getElementById("lista");
-  let n = 0;
-  GRUPOS.forEach(g => {
-    const sec = el("section", { class: "group" });
-    sec.appendChild(el("h2", { text: g.titulo }));
-    g.itens.forEach(it => {
-      const id = "item" + (++n);
-      const a = acoes(id, () => gerarPix(it.valor));
-      sec.appendChild(el("article", { class: "card" }, [
-        el("h3", { text: it.titulo }),
-        el("p", { text: it.descricao }),
-        el("div", { class: "price", text: formatarReal(it.valor) }),
-        a.botoes, a.qr
-      ]));
-    });
-    raiz.appendChild(sec);
+  const lista = el("section", { class: "list", "aria-label": "Presentes" });
+  ITENS.forEach((it, n) => {
+    const a = acoes("item" + (n + 1), () => gerarPix(it.valor));
+    lista.appendChild(el("article", { class: "card" }, [
+      el("h3", { text: it.titulo }),
+      el("p", { text: it.descricao }),
+      el("div", { class: "price", text: formatarReal(it.valor) }),
+      a.botoes, a.qr
+    ]));
   });
+  raiz.appendChild(lista);
 
   // Cartão "Outro valor"
   (function () {
@@ -291,7 +277,7 @@ if (typeof document !== "undefined") {
     input.addEventListener("input", () => {
       if (!a.qr.hidden) { const v = valorValido(); v === null ? (a.qr.hidden = true, a.btnQr.setAttribute("aria-expanded", "false"), a.btnQr.textContent = "Ver QR code") : desenharQr(a.qr, gerarPix(v)); }
     });
-    const sec = el("section", { class: "group" }, [
+    const sec = el("section", { class: "list" }, [
       el("h2", { text: "Outro valor" }),
       el("article", { class: "card" }, [
         el("h3", { text: "Prefere escolher quanto dar?" }),

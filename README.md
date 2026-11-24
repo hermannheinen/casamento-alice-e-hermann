@@ -4,7 +4,8 @@ Lista de presentes de casamento de Hermann & Alice: uma página estática (um ú
 
 ## Estrutura
 
-- `index.html` — página, CONFIG, lista de itens (`GRUPOS`) e geração do Pix
+- `index.html` — página, CONFIG, lista de itens (`ITENS`) e geração do Pix
+- `fonts/montserrat-latin.woff2` — Montserrat (SIL OFL 1.1), hospedada localmente, sem chamadas ao Google Fonts
 - `qrcode.js` — [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) 1.4.4, © Kazuhiko Arase, licença MIT
 - `test/pix.test.js` — testes do CRC16 e do payload
 
@@ -13,7 +14,7 @@ Lista de presentes de casamento de Hermann & Alice: uma página estática (um ú
 No `<script>` do `index.html`:
 
 - `CONFIG`: chave Pix, nome do recebedor (máx. 25) e cidade (máx. 15).
-- `GRUPOS`: textos e valores dos itens (array de objetos, separado da renderização).
+- `ITENS`: textos e valores dos itens (array de objetos, separado da renderização).
 
 ## Testar localmente
 

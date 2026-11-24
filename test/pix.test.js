@@ -10,8 +10,8 @@ const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1
 assert.strictEqual(scripts.length, 1, "esperava 1 script inline");
 const ctx = {};
 vm.createContext(ctx);
-vm.runInContext(scripts[0] + "\n;this.api={CONFIG,GRUPOS,crc16,gerarPix,limpar};", ctx);
-const { CONFIG, GRUPOS, crc16, gerarPix, limpar } = ctx.api;
+vm.runInContext(scripts[0] + "\n;this.api={CONFIG,ITENS,crc16,gerarPix,limpar};", ctx);
+const { CONFIG, ITENS, crc16, gerarPix, limpar } = ctx.api;
 
 let ok = 0;
 const check = (cond, msg) => { assert.ok(cond, msg); ok++; };
@@ -37,8 +37,8 @@ check(nomeEsp === "ALICE TEIXEIRA DA ROSA" && nomeEsp.length <= 25, "nome");
 check(cidEsp === "PORTO ALEGRE" && cidEsp.length <= 15, "cidade");
 check(limpar("José Conceição Ñandú", 25) === "JOSE CONCEICAO NANDU", "remoção de acentos");
 
-const valores = GRUPOS.flatMap(g => g.itens.map(i => i.valor)).concat([1, 75.5, 1234.56]);
-check(GRUPOS.flatMap(g => g.itens).length === 16, "16 itens");
+const valores = ITENS.map(i => i.valor).concat([1, 75.5, 1234.56]);
+check(ITENS.length === 16, "16 itens");
 
 for (const v of valores) {
   const p = gerarPix(v);
