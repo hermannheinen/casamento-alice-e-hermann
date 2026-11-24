@@ -38,7 +38,7 @@ check(cidEsp === "PORTO ALEGRE" && cidEsp.length <= 15, "cidade");
 check(limpar("José Conceição Ñandú", 25) === "JOSE CONCEICAO NANDU", "remoção de acentos");
 
 const valores = ITENS.map(i => i.valor).concat([1, 75.5, 1234.56]);
-check(ITENS.length === 16, "16 itens");
+check(ITENS.length === 15, "15 itens");
 
 for (const v of valores) {
   const p = gerarPix(v);
