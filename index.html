@@ -49,7 +49,7 @@
       <div class="actions local-botoes">
         <a class="btn btn-primary" id="l-maps" target="_blank" rel="noopener">Abrir no Google Maps</a>
         <a class="btn btn-secondary" id="l-waze" target="_blank" rel="noopener">Abrir no Waze</a>
-        <a class="btn btn-secondary" id="l-apple" target="_blank" rel="noopener">Abrir no Apple Maps</a>
+        <a class="btn btn-secondary" id="l-uber" target="_blank" rel="noopener">Pedir um Uber</a>
         <button type="button" class="btn-qr" id="copiar-endereco">Copiar endereço</button>
       </div>
     </section>
@@ -106,7 +106,9 @@
   const lat = EVENT.COORDS.lat.toFixed(6), lng = EVENT.COORDS.lng.toFixed(6);
   document.getElementById("l-maps").href = EVENT.MAPS_URL;
   document.getElementById("l-waze").href = "https://waze.com/ul?ll=" + lat + "," + lng + "&navigate=yes";
-  document.getElementById("l-apple").href = "https://maps.apple.com/?ll=" + lat + "," + lng + "&q=" + encodeURIComponent("Salão de Festas");
+  document.getElementById("l-uber").href = "https://m.uber.com/ul/?action=setPickup&pickup=my_location" +
+    "&dropoff%5Blatitude%5D=" + lat + "&dropoff%5Blongitude%5D=" + lng +
+    "&dropoff%5Bnickname%5D=" + encodeURIComponent("Salão de Festas");
 
   document.getElementById("copiar-endereco").addEventListener("click", () =>
     copiarTexto(enderecoCompleto, "Endereço copiado!", "Não consegui copiar. Selecione o endereço manualmente."));
