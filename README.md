@@ -1,4 +1,4 @@
-# wedding-gifts
+# casamento-alice-e-hermann
 
 Lista de presentes de casamento de Alice & Hermann: uma página estática (um único `index.html`, sem build, sem framework, sem backend). Cada item gera um Pix "copia e cola" (BR Code estático) com o valor já preenchido, mais o QR code correspondente. Tudo é gerado no navegador; nada é enviado a servidor algum, e não há analytics nem cookies.
 
@@ -32,7 +32,7 @@ node test/pix.test.js
 
 ## Publicar no GitHub Pages
 
-1. Crie um repositório **público** chamado `wedding-gifts` no GitHub.
+1. Crie um repositório **público** chamado `casamento-alice-e-hermann` no GitHub.
 2. Suba os arquivos (`git remote add origin <url>` e `git push -u origin main`).
 3. Em **Settings → Pages → Build and deployment → Deploy from a branch**, escolha **main** / **(root)** e salve.
-4. Após alguns minutos, a página estará em `https://SEU-USUARIO.github.io/wedding-gifts/`.
+4. Após alguns minutos, a página estará em `https://SEU-USUARIO.github.io/casamento-alice-e-hermann/`.
