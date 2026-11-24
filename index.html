@@ -12,7 +12,7 @@
 <meta property="og:image" content="logo.jpg">
 <meta name="theme-color" content="#fff7ed">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <header class="topo" id="topo"></header>
@@ -24,8 +24,9 @@
       <p class="data-destaque" data-ev="dataExtenso"></p>
       <p class="intro">Depois de uma reforma inteira, chegou a melhor parte: oficializar tudo e brindar com quem a gente mais gosta. Primeiro vem a assinatura do casamento e, depois, churrasco e cerveja, num clima leve e descontraído. Só falta você!</p>
       <p class="aviso-caixa rsvp">Confirme sua presença com a gente até <strong data-ev="confirmarAte"></strong>.</p>
+      <div class="actions" id="rsvp-botoes"></div>
       <div class="actions">
-        <a class="btn btn-primary" href="#local">Ver local e horários</a>
+        <a class="btn btn-secondary" href="#local">Ver local e horários</a>
         <a class="btn btn-secondary" href="#presentes">Ver lista de presentes</a>
       </div>
     </section>
@@ -87,21 +88,32 @@
   <footer>Obrigado pelo carinho! 💛</footer>
 </div>
 
-<script src="event.js"></script>
-<script src="site.js"></script>
-<script src="qrcode.js"></script>
-<script src="presentes.js"></script>
+<script src="event.js?v=4"></script>
+<script src="site.js?v=4"></script>
+<script src="qrcode.js?v=4"></script>
+<script src="presentes.js?v=4"></script>
 <script>
 (function () {
   // Preenche os textos a partir do objeto EVENT (event.js).
-  const dataLonga = new Date(EVENT.data + "T12:00:00Z").toLocaleDateString("pt-BR",
-    { weekday: "long", day: "2-digit", month: "long", year: "numeric", timeZone: "UTC" });
-  const confirmarAte = new Date(EVENT.confirmarAte + "T12:00:00Z").toLocaleDateString("pt-BR",
-    { weekday: "long", day: "2-digit", month: "2-digit", timeZone: "UTC" });
+  const dt = (iso, opts) => { const d = new Date(iso + "T12:00:00Z"); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR", Object.assign({ timeZone: "UTC" }, opts)); };
+  const confirmarAte = dt(EVENT.confirmarAte, { weekday: "long", day: "2-digit", month: "2-digit" });
+  const dataLonga = dt(EVENT.data, { weekday: "long", day: "2-digit", month: "long", year: "numeric" });
   const valores = { confirmarAte, noivos: EVENT.noivos, dataExtenso: dataLonga, assinatura: EVENT.assinatura, recepcao: EVENT.recepcao };
   document.querySelectorAll("[data-ev]").forEach(e => { e.textContent = valores[e.dataset.ev]; });
 
   const enderecoCompleto = EVENT.endereco + ", " + EVENT.cidade;
+  // Botões de WhatsApp para confirmar presença (mensagem já preenchida).
+  const diaMes = dt(EVENT.data, { day: "2-digit", month: "2-digit" });
+  const caixa = document.getElementById("rsvp-botoes");
+  (EVENT.contatos || []).forEach((c, i) => {
+    const a = document.createElement("a");
+    a.className = "btn " + (i === 0 ? "btn-primary" : "btn-secondary");
+    a.target = "_blank"; a.rel = "noopener";
+    a.textContent = c.rotulo;
+    a.href = "https://wa.me/" + c.fone + "?text=" + encodeURIComponent("Oi, " + c.nome + "! Quero confirmar minha presença no casamento (" + diaMes + "). Meu nome: ");
+    caixa.appendChild(a);
+  });
+
   document.getElementById("endereco").textContent = enderecoCompleto;
 
   // Links de localização montados a partir de COORDS (sem chave de API, sem mapa embutido).
