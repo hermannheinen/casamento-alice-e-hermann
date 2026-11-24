@@ -6,6 +6,8 @@ Lista de presentes de casamento de Hermann & Alice: uma página estática (um ú
 
 - `index.html` — página, CONFIG, lista de itens (`ITENS`) e geração do Pix
 - `fonts/montserrat-latin.woff2` — Montserrat (SIL OFL 1.1), hospedada localmente, sem chamadas ao Google Fonts
+- `logo.jpg` — monograma (versão reduzida do arquivo original)
+- `fonts/dmserifdisplay-latin.woff2` — DM Serif Display (SIL OFL 1.1), títulos
 - `qrcode.js` — [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) 1.4.4, © Kazuhiko Arase, licença MIT
 - `test/pix.test.js` — testes do CRC16 e do payload
 
