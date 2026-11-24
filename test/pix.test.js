@@ -1,11 +1,11 @@
 // Teste sem dependências: node test/pix.test.js
-// Carrega o <script> real do index.html (sem DOM), então testa o mesmo código que roda no navegador.
+// Carrega o <script> real do presentes.html (sem DOM), então testa o mesmo código que roda no navegador.
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const assert = require("assert");
 
-const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(path.join(__dirname, "..", "presentes.html"), "utf8");
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 assert.strictEqual(scripts.length, 1, "esperava 1 script inline");
 const ctx = {};

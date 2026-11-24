@@ -4,7 +4,10 @@ Lista de presentes de casamento de Alice & Hermann: uma página estática (um ú
 
 ## Estrutura
 
-- `index.html` — página, CONFIG, lista de itens (`ITENS`) e geração do Pix
+- `index.html` — convite, local e horários, traje (seções com âncoras)
+- `presentes.html` — lista de presentes: CONFIG do Pix, `ITENS` e geração do Pix
+- `event.js` — dados do casamento (`EVENT`): data, horários, endereço, coordenadas, link do mapa
+- `style.css` e `site.js` — estilos e script compartilhados (menu, aviso, copiar)
 - `fonts/montserrat-latin.woff2` — Montserrat (SIL OFL 1.1), hospedada localmente, sem chamadas ao Google Fonts
 - `logo.jpg` — monograma (versão reduzida do arquivo original)
 - `fonts/dmserifdisplay-latin.woff2` — DM Serif Display (SIL OFL 1.1), títulos
@@ -13,7 +16,7 @@ Lista de presentes de casamento de Alice & Hermann: uma página estática (um ú
 
 ## Editar
 
-No `<script>` do `index.html`:
+Dados do casamento: `event.js`. Presentes e Pix: no `<script>` do `presentes.html`:
 
 - `CONFIG`: chave Pix, nome do recebedor (máx. 25) e cidade (máx. 15).
 - `ITENS`: textos e valores dos itens (array de objetos, separado da renderização).
