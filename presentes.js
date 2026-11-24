@@ -1,36 +1,3 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lista de presentes — Alice &amp; Hermann</title>
-<meta name="description" content="Já temos o principal: vocês comemorando com a gente! Escolha um item da nossa lista de presentes simbólica e bem-humorada.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Lista de presentes — Alice &amp; Hermann">
-<meta property="og:description" content="Uma lista simbólica e bem-humorada. Escolha o item que mais combina com você e pague por Pix.">
-<meta name="theme-color" content="#fff7ed">
-<meta property="og:image" content="logo.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="topo" id="topo"></header>
-<div class="wrap">
-  <header class="cabecalho">
-    <img class="logo" src="logo.jpg" width="260" height="260" alt="Monograma A e H, Alice e Hermann">
-    <h1>Lista de presentes — Alice &amp; Hermann</h1>
-    <p class="intro">Já temos o principal: vocês comemorando com a gente! Depois de uma grande reforma no nosso apartamento (e já planejando a nossa viagem do ano que vem), criamos uma lista simbólica e bem-humorada. Escolha o item que mais combina com você — o valor vai direto para o fundo dos últimos retoques da casa e para as nossas férias!</p>
-  </header>
-
-  <main id="lista"></main>
-
-  <footer>Obrigado pelo carinho! 💛</footer>
-</div>
-<script src="event.js"></script>
-<script src="site.js"></script>
-<script src="qrcode.js"></script>
-<script>
 /* ============ CONFIG — edite aqui ============ */
 const CONFIG = {
   chavePix: "becb4f6d-b217-46e2-9f7b-4509b4ecc9cb",
@@ -220,6 +187,3 @@ if (typeof document !== "undefined") {
     raiz.appendChild(sec);
   })();
 }
-</script>
-</body>
-</html>

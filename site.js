@@ -4,7 +4,7 @@
     ["Convite", "index.html#convite"],
     ["Local e horários", "index.html#local"],
     ["Traje", "index.html#traje"],
-    ["Presentes", "presentes.html"]
+    ["Presentes", "index.html#presentes"]
   ];
 
   window.el = function (tag, attrs, children) {
